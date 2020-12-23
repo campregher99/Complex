@@ -14,12 +14,12 @@ void Complex::setPolar(double _module, double _phase)
 
 double Complex::getReal(void) const
 {
-	return real;
+	return real.getValue();
 }
 
 double Complex::getImaginary(void) const
 {
-	return imaginary;
+	return imaginary.getValue();
 }
 
 double Complex::getModule(void) const
@@ -148,12 +148,12 @@ bool Complex::operator>=(const Complex& _complex) const
 
 double Complex::module(void) const
 {
-	return sqrt(real*real+imaginary*imaginary);
+	return sqrt((real*real+imaginary*imaginary).getValue());
 }
 
 double Complex::phase(void) const
 {
-	return atan2(imaginary,real);
+	return atan2(imaginary.getValue(),real.getValue());
 }
 
 bool Complex::toCartesian(double _module, double _phase)
