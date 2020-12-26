@@ -14,12 +14,12 @@ void Complex::setPolar(double _module, double _phase)
 
 double Complex::getReal(void) const
 {
-	return real.getValue();
+	return real;
 }
 
 double Complex::getImaginary(void) const
 {
-	return imaginary.getValue();
+	return imaginary;
 }
 
 double Complex::getModule(void) const
@@ -57,7 +57,7 @@ Complex Complex::operator-(const Complex& _complex) const
 Complex Complex::operator*(const Complex& _complex) const
 {
 	Complex mul{module()*_complex.getModule()*cos(phase()+_complex.getPhase()),module()*_complex.getModule()*sin(phase()+_complex.getPhase())};
-		return mul;
+	return mul;
 }
 
 Complex Complex::operator/(const Complex& _complex) const
@@ -104,56 +104,56 @@ bool Complex::operator==(const Complex& _complex) const
 bool Complex::operator!=(const Complex& _complex) const
 {
 	if(!(*this==_complex))
-		{
-			return true;
-		}
-		return false;
+	{
+		return true;
+	}
+	return false;
 }
 
 bool Complex::operator<(const Complex& _complex) const
 {
 	if(module()<_complex.getModule())
-		{
-			return true;
-		}
-		return false;
+	{
+		return true;
+	}
+	return false;
 }
 
 bool Complex::operator>(const Complex& _complex) const
 {
 	if(!(*this<_complex))
-		{
-			return true;
-		}
-		return false;
+	{
+		return true;
+	}
+	return false;
 }
 
 bool Complex::operator<=(const Complex& _complex) const
 {
 	if(*this<_complex||*this==_complex)
-		{
-			return true;
-		}
-		return false;
+	{
+		return true;
+	}
+	return false;
 }
 
 bool Complex::operator>=(const Complex& _complex) const
 {
 	if(*this>_complex||*this==_complex)
-		{
-			return true;
-		}
-		return false;
+	{
+		return true;
+	}
+	return false;
 }
 
 double Complex::module(void) const
 {
-	return sqrt((real*real+imaginary*imaginary).getValue());
+	return sqrt(real.pow(2)+imaginary.pow(2));
 }
 
 double Complex::phase(void) const
 {
-	return atan2(imaginary.getValue(),real.getValue());
+	return atan2((double)imaginary,real);
 }
 
 bool Complex::toCartesian(double _module, double _phase)

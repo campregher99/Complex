@@ -1,19 +1,25 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 #include <math.h>
+#define MORE long
 #include "Double.h"
 class Complex
 {
 	//variabili
 private:
-	Double real = 0;
-	Double imaginary = 0;
+	Double real {0};
+	Double imaginary {0};
 
 	//funzioni
 public:
 	//costruttori
-	explicit Complex() {Double::setMultiplier(1000);};
-	Complex(double _real, double _imaginary): real {_real}, imaginary{_imaginary} {Double::setMultiplier(1000);};
+	explicit Complex() {Double::setMultiplier(10000);};
+	Complex(double _real, double _imaginary)
+	{
+	    Double::setMultiplier(10000);
+	    real = _real;
+	    imaginary = _imaginary;
+    };
 
 	//setter e getter
 	void setCartesian(double _real, double _imaginary);
@@ -89,14 +95,13 @@ template <typename T> Complex Complex::operator-(T _number) const
 
 template <typename T> Complex Complex::operator*(T _number) const
 {
-    double _real=module()*_number*cos(phase()),_imaginary=module()*_number*sin(phase());
-	Complex mul {_real,_imaginary};
+	Complex mul {module()*_number*cos(phase()),module()*_number*sin(phase())};
 	return mul;
 }
 
 template <typename T> Complex Complex::operator/(T _number) const
 {
-	Complex div {module()/_number*cos(imaginary.getValue()),module()/_number*sin(imaginary.getValue())};
+	Complex div {module()/_number*cos((double)imaginary),module()/_number*sin((double)imaginary)};
 	return div;
 }
 
@@ -107,64 +112,64 @@ template <typename T> Complex Complex::operator+=(T _number)
 }
 
 template <typename T> Complex Complex::operator-=(T _number)
-	{
-		real-=_number;
-		return *this;
-	}
+{
+	real-=_number;
+	return *this;
+}
 
 template <typename T> Complex Complex::operator*=(T _number)
-	{
-		*this=*this*_number;
-		return *this;
-	}
+{
+	*this=*this*_number;
+	return *this;
+}
 
 template <typename T> Complex Complex::operator/=(T _number)
-	{
-		*this=*this/_number;
-		return *this;
-	}
+{
+	*this=*this/_number;
+	return *this;
+}
 
 template <typename T> bool Complex::operator==(T _number) const
-	{
-		if (real==_number&&imaginary!=0)
-			return true;
-		return false;
-	}
+{
+	if (real==_number&&imaginary!=0)
+		return true;
+	return false;
+}
 
 template <typename T> bool Complex::operator!=(T _number) const
-	{
-		if(!(*this==_number))
-			return true;
-		return false;
-	}
+{
+	if(!(*this==_number))
+		return true;
+	return false;
+}
 
 template <typename T> bool Complex::operator<(T _number) const
-	{
-		if(module()<_number)
-			return true;
-		return false;
-	}
+{
+	if(module()<_number)
+		return true;
+	return false;
+}
 
 template <typename T> bool Complex::operator>(T _number) const
-	{
-		if(!(*this<_number))
-			return true;
-		return false;
-	}
+{
+	if(!(*this<_number))
+		return true;
+	return false;
+}
 
 template <typename T> bool Complex::operator<=(T _number) const
-	{
-		if(*this<_number||*this==_number)
-			return true;
-		return false;
-	}
+{
+	if(*this<_number||*this==_number)
+		return true;
+	return false;
+}
 
 template <typename T> bool Complex::operator>=(T _number) const
-	{
-		if(*this>_number||*this==_number)
-			return true;
-		return false;
-	}
+{
+	if(*this>_number||*this==_number)
+		return true;
+	return false;
+}
 
 template <typename T> Complex operator+(T _number, const Complex& _complex)
 {
